@@ -1,0 +1,9 @@
+[package]
+name = "play-mysql"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies.mysql]
+mysql = "*"
+default-features = false
+features = ["socket"]

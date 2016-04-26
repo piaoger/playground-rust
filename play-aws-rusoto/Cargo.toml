@@ -1,0 +1,11 @@
+[package]
+name = "play-aws-rusoto"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+env_logger = "0.3.3"
+
+[dependencies.rusoto]
+features = ["s3"]
+git = "https://github.com/piaoger/rusoto"

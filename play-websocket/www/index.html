@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Rustful Websocket</title>
+    </head>
+    <body>
+        <script>
+
+            // WebSocket
+            //
+            //   https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
+            //   https://developer.mozilla.org/en-US/docs/WebSockets
+            //   http://w3c.github.io/websockets/
+            //   https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/
+            //   http://javascript.ruanyifeng.com/htmlapi/file.html
+            //   http://www.infoq.com/articles/websocket-desktop-agility-web-applications?%20Design
+            //   https://github.com/kanaka/websockify
+            //   https://github.com/binaryjs/binaryjs
+            // 
+            //  readyState: checks the connection status of Websocket
+            //     0 - CONNECTING 
+            //     1 - OPEN 
+            //     2 - CLOSING 
+            //     3 - CLOSED
+            //
+            //   bufferedAmount: 
+            //       The number of bytes of data that have been queued using calls to send() 
+            //       but not yet transmitted to the network. 
+            //       If the connection is closed, this attribute's value will only increase with each call to the send() method 
+            //       (the number does not reset to zero once the connection closes).
+            //       It's used to saturate the network without sending the data at a higher rate than the network can handle
+            //
+            //      // Theshold: 10k max buffer size.
+            //      // In websocketify, the theshold is 200
+            //      // In some other examples, it's 0
+            //      var THRESHOLD = 10240;
+            //      // Create a New WebSocket connection
+            //      var ws = new WebSocket("ws://wssss.com");
+            //      // Listen for the opening event
+            //      ws.onopen = function () {
+            //          // Attempt to send update every second.
+            //          setInterval( function() {
+            //              // Send only if the buffer is not full
+            //              if (ws.bufferedAmount < THRESHOLD) {
+            //                  ws.send(getApplicationState());
+            //              }
+            //          }, 1000);
+            //      };
+            //
+            // Events
+            //   WebSocket.onmessage
+            //   WebSocket.onopen 
+            //   WebSocket.onerror
+            //   WebSocket.onclose
+            //
+            // Methods:
+            //   send
+            //   close
+
+            function appendMessage(data) {
+                var received = document.getElementById("received");
+                var br = document.createElement("BR");
+                var text = document.createTextNode(data);
+                received.appendChild(br);
+                received.appendChild(text);
+            }
+
+            var websocket = new WebSocket("ws://127.0.0.1:8021", "rust-websocket");
+
+            websocket.onmessage = function (event) {
+                var dataframe;
+                if(event.data instanceof ArrayBuffer) {
+                    var uin8array = new Uint8Array(event.data);
+                    dataframe = 'Binary(ArrayBuffer) => ' + JSON.stringify(uin8array);
+                    appendMessage(dataframe);
+
+                } else if(event.data instanceof Blob) {
+                    // TODO: Blob to databuffer
+                    dataframe = 'Binary(Blob) => TODO';
+
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        var arrayBuffer = reader.result;
+                        var uin8array = new Uint8Array(arrayBuffer);
+                        var dataframe = 'Binary(Blob) => ' + JSON.stringify(uin8array);
+                        appendMessage(dataframe);
+                    }
+
+                    reader.readAsArrayBuffer(event.data);
+
+                } else {
+                    dataframe = 'Text => ' + event.data;
+                    appendMessage(dataframe);
+                }
+
+
+            };
+
+            websocket.onopen = function (evt) {  
+                appendMessage("websocket connection is established");
+            };  
+           
+            websocket.onclose = function (evt) {  
+                appendMessage("websocket connection is closed");
+            };  
+           
+            websocket.onerror = function (evt) {  
+                appendMessage("websocket error found");
+            };
+            
+            function send(element) {
+
+                appendMessage('bufferedAmount:' + websocket.bufferedAmount);
+
+                // WebSocket status check
+                if(websocket.readyState!= WebSocket.OPEN) {
+                    try {
+                        websocket.send("dummy sent just for testing bufferedAmount value after calling close()");
+                    } catch (ex){
+
+                    }
+                    return;
+                }
+
+                // Text Frame
+                var input = document.getElementById(element);
+                websocket.send(input.value);
+                input.value = "";
+
+                // Binary Frame: arraybuffer
+                websocket.binaryType = "arraybuffer";
+                var a = new Uint8Array([8, 6, 7, 3, 5, 9.0]);
+                websocket.send(a.buffer);
+
+                // Binary Frame: blob
+                setTimeout(function(){
+                    // [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33]
+                    websocket.binaryType = "blob";
+                    var blob = new Blob(["Hello World!"],{type:"text/plain"}); 
+                    websocket.send(blob);
+
+                }, 1000);
+
+            }
+
+            function disconnect() {
+                // close the websocket
+                websocket.close();
+            }
+
+        </script>
+            <p id="received">
+                <strong>Received Messages:</strong>
+            </p>
+            <input type="text" id="message">
+            <br/>
+
+            <input type="submit" value="Send" onclick="send('message'); return false">
+            <input type="button" id="closebtn" value="disconnect" onclick="disconnect();">
+
+    </body>
+</html>

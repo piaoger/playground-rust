@@ -1,0 +1,9 @@
+[package]
+name = "play-crontab"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+cronparse = "0.5.0"
+users = "0.4.4"
+regex = "0.1.*"

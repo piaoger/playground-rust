@@ -1,0 +1,14 @@
+[package]
+name = "play-aws"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+hyper = "*"
+serde = "*"
+serde_json = "*"
+serde_macros = "*"
+rust-crypto = "*"
+time = "*"
+url = "*"
+rustc-serialize = "*"

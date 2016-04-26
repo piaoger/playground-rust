@@ -1,0 +1,10 @@
+[package]
+name = "play-imageops"
+version = "0.1.0"
+authors = ["piaoger"]
+
+
+[dependencies]
+image = "*"
+rand = "*"
+nalgebra ="*"

@@ -1,0 +1,9 @@
+[package]
+name = "play-slack"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+slack = "0.12.2"
+slack-hook = "0.1"
+#regex = "*"

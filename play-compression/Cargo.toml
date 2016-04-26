@@ -1,0 +1,12 @@
+[package]
+name = "play-compression"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+flate2 = "0.2.0"
+snappy = "0.3.0"
+lz4 = "1.14.131"
+
+[dependencies.brotli]
+git = "https://github.com/ende76/brotli-rs"

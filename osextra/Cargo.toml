@@ -1,0 +1,7 @@
+[package]
+name = "osextra"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+regex = "0.1.*"

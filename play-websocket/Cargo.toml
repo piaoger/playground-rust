@@ -1,0 +1,16 @@
+[package]
+name = "play-websocket"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+iron = "*"
+router = "*"
+serde = "*"
+serde_macros = "*"
+serde_json = "*"
+websocket = "*"
+staticfile = "*"
+mount = "*"
+anymap = "*"
+rand = "*"

@@ -1,0 +1,16 @@
+[package]
+name = "cloudstorage"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+threadpool = "*"
+#rusoto = "*"
+clap = "^1.5.5"
+env_logger = "0.3.2"
+log = "0.3.4"
+
+[[bin]]
+doc = false
+name = "cloudstorage"
+path = "src/bin/main.rs"

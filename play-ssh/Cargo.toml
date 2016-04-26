@@ -1,0 +1,8 @@
+[package]
+name = "play-ssh"
+version = "0.1.0"
+authors = ["piaoger"]
+
+[dependencies]
+
+ssh2 = "0.2.10"
