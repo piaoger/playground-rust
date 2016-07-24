@@ -1,0 +1,24 @@
+[package]
+authors = ["Norbert Pozar <bertapozar@gmail.com>"]
+name = "surfviz"
+version = "0.1.0"
+license = "MIT"
+
+[dependencies]
+glium = "0.15.0"
+ndarray = "0.6.0"
+
+[dependencies.cgmath]
+default_features = false
+version = "0.10.0"
+
+[dependencies.isosurface]
+git = "https://github.com/rekka/isosurface-rs.git"
+optional = false
+
+
+
+[[bin]]
+doc = false
+name = "viewer"
+path = "src/bin/main.rs"
