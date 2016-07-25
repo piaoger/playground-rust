@@ -45,6 +45,24 @@ impl CameraState {
         }
     }
 
+    pub fn reset(&mut self) {
+        self.aspect_ratio = 1024.0 / 768.0;
+        self.position = Point3::new(0.0, 0.0, 0.0);
+        self.radius = 3.;
+            // direction: (0.0, 0.0, -1.0);
+        self.azimuth = 0.;
+        self.inclination = 0.;
+        self.moving_up = false;
+        self.moving_left = false;
+        self.moving_down = false;
+        self.moving_right = false;
+        self.moving_forward = false;
+        self.moving_backward = false;
+        self.dragging = false;
+        self.zooming = false;
+        self.mouse_position = None;
+    }
+
     // pub fn set_position(&mut self, pos: (f32, f32, f32)) {
     //     self.position = pos;
     // }
@@ -227,15 +245,11 @@ impl CameraState {
                                        glutin::MouseButton::Right) => self.zooming = false,
 
 
-            &glutin::Event::MouseWheel(glutin::MouseScrollDelta::PixelDelta(u, v),_) =>
-                    {println!("zooming");
-
-                        let offset = v * 0.01 ;
-                        let f = self.direction();
-                        self.position += -f * offset;
-
-
-                    },
+            &glutin::Event::MouseWheel(glutin::MouseScrollDelta::PixelDelta(u, v),_) => {
+                let offset = v * 0.01 ;
+                let f = self.direction();
+                self.position += -f * offset;
+            },
 
             _ => {}
         }

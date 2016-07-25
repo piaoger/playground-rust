@@ -1,4 +1,4 @@
-extern crate surfviz;
+extern crate sceneview;
 #[macro_use]
 extern crate glium;
 extern crate isosurface;
@@ -8,8 +8,8 @@ use ndarray::Array;
 use isosurface::marching_tetrahedra;
 use glium::glutin;
 
-use surfviz::surface;
-use surfviz::camera;
+use sceneview::surface;
+use sceneview::camera;
 
 fn main() {
     let res = 10;
@@ -54,7 +54,7 @@ fn main() {
         camera.update();
 
         let mut target = display.draw();
-        target.clear_color_and_depth((0.0, 0.0, 0.0, 1.0), 1.0);
+        target.clear_color_and_depth((0.1, 0.1, 0.3, 1.0), 1.0);
 
         surface.draw(&mut target, &camera, wireframe, show_normals).unwrap();
 
@@ -73,6 +73,12 @@ fn main() {
                                              Some(glutin::VirtualKeyCode::N)) => {
                     show_normals = !show_normals
                 }
+                glutin::Event::KeyboardInput(glutin::ElementState::Pressed,
+                                             _,
+                                             Some(glutin::VirtualKeyCode::R)) => {
+                    camera.reset();
+                }
+
                 ev => camera.process_input(&ev),
             }
         }
