@@ -8,4 +8,4 @@ env_logger = "0.3.3"
 
 [dependencies.rusoto]
 features = ["s3"]
-git = "https://github.com/piaoger/rusoto"
+git = "https://github.com/rusoto/rusoto"

@@ -27,7 +27,7 @@ fn s3_list_buckets(s3: &mut S3Helper<ChainProvider>) -> Result<(), AwsError> {
 
 fn s3_create_bucket(s3: &mut S3Helper<ChainProvider>) -> Result<(), AwsError> {
     println!("creating buckets.");
-    let response = try!(s3.create_bucket("BUCKET_XYZ", None));
+    let response = try!(s3.create_bucket_in_region("create-bucket-xyz", Region::CnNorth1, None));
     println!("create bucket: {:?}", response);
 
     Ok(())
@@ -37,7 +37,7 @@ fn all_s3_tests() {
 
     println!("s3 integration tests starting up.");
 
-    let mut s3 = S3Helper::new(ChainProvider::new().unwrap(), Region::UsEast1);
+    let mut s3 = S3Helper::new(ChainProvider::new(), Region::CnNorth1);
 
     match s3_create_bucket(&mut s3) {
         Ok(_) => { println!("Everything worked for S3 list buckets."); },
