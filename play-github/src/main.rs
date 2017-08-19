@@ -96,10 +96,10 @@ use serde_json::Value;
 // #  <!-- </textarea> --><!-- '"` --><meta content="authenticity_token" name="csrf-param" />
 // #  <meta content="alHFJODwutAVXd+wtR/LVqHPLZbXMZSYsesGDL2uhq/sQQDmsSWK9UyCbFL+EcYCpDlqfg9ChpEtt1K5UTwOWA==" name="csrf-token" />
 // #  aFdKQG9EsHAcrJXSqCxqLK0PdO8LxfwvIvRVte4wpzRv8/e4pxYAW9iC91j5gQI8wmMJm0xyYnY4XLv/8y0bQQ==
-// curl 'https://git.autodesk.com/session'    -H 'Cookie: _fi_sess=eyJzZXNzaW9uX2lkIjoiMzcxMzA1MjNhMmI3ODZlMGFjMzAxZDJhMWZiODQ4OTAiLCJfY3NyZl90b2tlbiI6Im1GWW8vanVoV0JoQjdWVUJaYWNJcUxpZW1wQmF0NVoyS0lCaGVJeVJBZ1U9In0%3D--47e0bf50009dd3e74fd68fd5fd3c5ccd583fece7;   tz=Asia%2FShanghai' -H 'Connection: keep-alive' -H 'DNT: 1' --data 'utf8=%E2%9C%93&authenticity_token=PTOZ0K%2Ft6FtYmG6%2F%2B3wkGP1uGs7sokSWvizPwWNBpI8d1a2k0DfHx0TbrmGIClnH26nLwQpyVbadLr4VO0Uu%2FQ%3D%3D&login=gongp&password=ADSKwangbadan4&return_to=https%3A%2F%2Fgit.autodesk.com%2FHBP%2FRAAS' --compressed --include
+// curl 'https://git.adsk.com/session'    -H 'Cookie: _fi_sess=eyJzZXNzaW9uX2lkIjoiMzcxMzA1MjNhMmI3ODZlMGFjMzAxZDJhMWZiODQ4OTAiLCJfY3NyZl90b2tlbiI6Im1GWW8vanVoV0JoQjdWVUJaYWNJcUxpZW1wQmF0NVoyS0lCaGVJeVJBZ1U9In0%3D--47e0bf50009dd3e74fd68fd5fd3c5ccd583fece7;   tz=Asia%2FShanghai' -H 'Connection: keep-alive' -H 'DNT: 1' --data 'utf8=%E2%9C%93&authenticity_token=PTOZ0K%2Ft6FtYmG6%2F%2B3wkGP1uGs7sokSWvizPwWNBpI8d1a2k0DfHx0TbrmGIClnH26nLwQpyVbadLr4VO0Uu%2FQ%3D%3D&login=gongp&password=ADSKwangbadan4&return_to=https%3A%2F%2Fgit.adsk.com%2Fgongp%2FRAAS' --compressed --include
 //
 // # user_session is must have
-// curl 'https://git.autodesk.com/HBP/RAAS'   -H 'Referer: https://git.autodesk.com/' -H 'Cookie:  user_session=r6FgcO3g-E5qivzqxFk3bNLc_vdAJk-lLXxDrGl22vIWR3_8VwcY_w1YtRjlBfbtJzzv-u_ql6h9nu2F; logged_in=yes; dotcom_user=gongp; '
+// curl 'https://git.adsk.com/gongp/RAAS'   -H 'Referer: https://git.adsk.com/' -H 'Cookie:  user_session=r6FgcO3g-E5qivzqxFk3bNLc_vdAJk-lLXxDrGl22vIWR3_8VwcY_w1YtRjlBfbtJzzv-u_ql6h9nu2F; logged_in=yes; dotcom_user=gongp; '
 
 
 
