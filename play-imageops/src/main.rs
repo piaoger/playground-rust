@@ -5,11 +5,37 @@ extern crate rand;
 extern crate nalgebra;
 
 use image::{FilterType, GenericImage, Pixel};
-use nalgebra::DMat;
+use nalgebra::DMatrix;
 use rand::distributions::{Normal, IndependentSample};
-
+use std::path::Path;
 use std::fs::File;
 
+//  image crate only supports 16 bit tiff
+fn export_tiff() {
+    let e=image::open( "assets/render.tiff");
+    match(e){
+           Err(e) => {
+            println!("  failure:   {}",  e );
+        },
+        _ => {
+            ();
+        }
+    }
+
+    let img = image::open( "assets/render.tiff").ok().expect("Opening tiff file failed");
+
+    // The dimensions method returns the images width and height
+    println!("dimensions {:?}", img.dimensions());
+
+    // The color method returns the image's ColorType
+    println!("{:?}", img.color());
+
+    let ref mut fout = File::create(&Path::new("out-export.jpg")).unwrap();
+
+    // Write the contents of this image to the Writer in PNG format.
+    let _ = img.save(fout, image::PNG).unwrap();
+
+}
 
 // Examples from https://github.com/zsiciarz/24daysofrust
 fn twentyfour_days_of_rust() {
@@ -63,7 +89,7 @@ fn twentyfour_days_of_rust() {
     println!("{:?}", v);
     let v = (0..10).map(|_| rand::random::<u32>()).collect::<Vec<_>>();
     println!("{:?}", v);
-    let mat: DMat<u32> = DMat::from_fn(7, 7, |i, j| if j <= i { 1 } else { 0 });
+    let mat: DMatrix<u32> = DMatrix::from_fn(7, 7, |i, j| if j <= i { 1 } else { 0 });
     println!("{:?}", mat);
     let buffer = image::ImageBuffer::from_fn(512u32, 512u32, |x: u32, y: u32| {
         Pixel::from_channels((x * y % 256) as u8, (y % 256) as u8, (x % 256) as u8, 255)
@@ -75,5 +101,6 @@ fn twentyfour_days_of_rust() {
 
 
 fn main() {
-	twentyfour_days_of_rust();
+	//twentyfour_days_of_rust();
+    export_tiff();
 }
